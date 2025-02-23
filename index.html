@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shaurya Sahayak - Your AI Emergency Assistant</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #121212;
+            color: #ffff00; /* Yellow text for better contrast */
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .moving-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, #1A237E 25%, #D32F2F 25%, #D32F2F 50%, #1A237E 50%, #1A237E 75%, #D32F2F 75%, #D32F2F 100%);
+            background-size: 40px 40px;
+            z-index: -1;
+            animation: moveBackground 20s linear infinite;
+            opacity: 0.8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            color: #fff;
+            font-size: 1.5em;
+            font-weight: bold;
+            overflow: hidden;
+        }
+
+        @keyframes moveBackground {
+            0% { background-position: 0 0; }
+            100% { background-position: 40px 40px; }
+        }
+
+        .mission-text-container {
+            position: absolute;
+            top: 20%;
+            left: 0;
+            width: 100%;
+            animation: moveMissionText 30s linear infinite;
+        }
+
+        @keyframes moveMissionText {
+            0% { transform: translateX(100%); opacity: 0.5; }
+            10%, 90% {opacity: 0.9;}
+            100% { transform: translateX(-200%); opacity: 0.5; }
+        }
+
+
+        .header {
+            background-color: rgba(20, 20, 20, 0.9);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            border-bottom: 3px solid #FFD700; /* Gold border for header */
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em; /* Increased font size */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-shadow: 2px 2px 3px #000; /* Text shadow for 3D effect */
+        }
+
+        .header-logo {
+            margin-right: 15px; /* Increased margin */
+        }
+
+        .header-logo img {
+            height: 70px; /* Increased logo size */
+        }
+
+        .india-flag-logo {
+            margin-left: 15px; /* Increased margin */
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .india-flag-logo span {
+            display: inline-block;
+            width: 25px; /* Increased size */
+            height: 25px; /* Increased size */
+            margin-right: 7px; /* Increased margin */
+            border-radius: 50%;
+            background: conic-gradient(from 90deg, #FF9933 33%, white 33% 66%, #128807 66%);
+            border: 2px solid #ccc;
+            position: relative;
+        }
+
+        .india-flag-logo span::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 12px; /* Increased size */
+            height: 12px; /* Increased size */
+            border-radius: 50%;
+            background-color: navy;
+            transform: translate(-50%, -50%);
+        }
+        .google-verified {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+
+        .google-verified a {
+            display: inline-block;
+        }
+
+        .google-verified img {
+            height: 35px; /* Increased badge size */
+            border-radius: 7px;
+            box-shadow: 1px 1px 2px #000;
+        }
+
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(30, 30, 30, 0.8);
+            border-radius: 15px; /* More rounded corners */
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.7); /* Stronger shadow */
+            border: 2px solid #FFD700; /* Gold border for container */
+        }
+
+        .emergency-numbers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Increased min width */
+            gap: 25px; /* Increased gap */
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .emergency-number {
+            background-color: #333;
+            padding: 30px 20px; /* Increased padding */
+            border-radius: 12px; /* More rounded corners */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Stronger shadow */
+            position: relative;
+            overflow: hidden;
+            color: #fff; /* Default text color */
+            background-image: linear-gradient(to bottom right, #1A237E, #D32F2F); /* Gradient background */
+            border: 1px solid #FFD700; /* Gold border for numbers */
+        }
+
+        .emergency-number:before {
+            content: 'CALL';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #D32F2F;
+            color: white;
+            padding: 5px 8px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            font-weight: bold;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+
+        .emergency-number:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.8); /* Stronger shadow on hover */
+        }
+
+        .emergency-number h3 {
+            margin-top: 0;
+            font-size: 1.5em; /* Increased font size */
+            text-shadow: 1px 1px 2px #000; /* Text shadow for 3D effect */
+        }
+
+        .emergency-number p {
+            margin-bottom: 0;
+            font-size: 2em; /* Increased font size */
+            font-weight: bold;
+            text-shadow: 2px 2px 3px #000; /* Text shadow for 3D effect */
+        }
+
+        .news-section, .schemes-section, .todo-section, .contact-section, .login-section, .language-section, .map-section, .ai-robot-section, .about-us-section, .gold-rate-section, .state-emergency-section, .time-section {
+            margin-bottom: 30px;
+            padding: 25px; /* Increased padding */
+            background-color: #333;
+            border-radius: 12px; /* More rounded corners */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Stronger shadow */
+            border: 1px solid #FFD700; /* Gold border for sections */
+        }
+
+        .news-section h2, .schemes-section h2, .todo-section h2, .contact-section h2, .login-section h2, .language-section h2, .map-section h2, .ai-robot-section h2, .about-us-section h2, .gold-rate-section h2, .state-emergency-section h2, .time-section h2 {
+            color: #eee;
+            border-bottom: 3px solid #FFD700; /* Gold border for section titles */
+            padding-bottom: 12px;
+            font-size: 1.8em; /* Increased font size */
+            text-shadow: 1px 1px 2px #000; /* Text shadow for 3D effect */
+        }
+
+        .news-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 2px dashed #555;
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .news-item h4 {
+            color: #fff;
+            margin-top: 0;
+            font-size: 1.3em; /* Increased font size */
+        }
+
+        .news-item p {
+            color: #ddd;
+            margin-bottom: 0;
+            line-height: 1.7; /* Increased line height for readability */
+        }
+
+        .news-refresh-button {
+            background-color: #D32F2F;
+            color: white;
+            border: none;
+            padding: 12px 20px; /* Increased padding */
+            border-radius: 7px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .news-refresh-button:hover {
+            background-color: #b71c1c;
+            transform: scale(1.05);
+        }
+
+        .todo-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .todo-list li {
+            background-color: #444;
+            padding: 15px; /* Increased padding */
+            margin-bottom: 10px;
+            border-radius: 7px;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .todo-list li span {
+            flex-grow: 1;
+            margin-right: 15px;
+            font-size: 1.1em; /* Increased font size */
+        }
+
+        .todo-list li button {
+            background-color: #555;
+            color: white;
+            border: none;
+            padding: 10px 15px; /* Increased padding */
+            border-radius: 7px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .todo-list li button:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        .contact-info p, .about-us-content p {
+            color: #ddd;
+            line-height: 1.7; /* Increased line height for readability */
+            font-size: 1.1em; /* Increased font size */
+        }
+
+        .contact-options {
+            display: flex;
+            gap: 25px; /* Increased gap */
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        .contact-option {
+            background-color: #444;
+            color: white;
+            padding: 20px 25px; /* Increased padding */
+            border-radius: 12px; /* More rounded corners */
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border: 1px solid #FFD700; /* Gold border for contact options */
+        }
+
+        .contact-option:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8); /* Stronger shadow on hover */
+        }
+
+        .contact-option i {
+            display: block;
+            font-size: 2.5em; /* Increased icon size */
+            margin-bottom: 12px;
+            text-shadow: 1px 1px 2px #000; /* Text shadow for 3D effect */
+        }
+
+        .language-select {
+            padding: 12px;
+            border-radius: 7px;
+            background-color: #444;
+            color: white;
+            border: 1px solid #555;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .login-box {
+            background-color: #444;
+            padding: 30px; /* Increased padding */
+            border-radius: 12px; /* More rounded corners */
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border: 1px solid #FFD700; /* Gold border for login box */
+        }
+
+        .login-box input[type="password"] {
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 7px;
+            border: 1px solid #666;
+            background-color: #555;
+            color: white;
+            font-size: 1em;
+        }
+
+        .login-box button {
+            background-color: #1A237E;
+            color: white;
+            border: none;
+            padding: 12px 20px; /* Increased padding */
+            border-radius: 7px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            font-size: 1em;
+        }
+
+        .login-box button:hover {
+            background-color: #0d124d;
+            transform: scale(1.05);
+        }
+
+        .login-message {
+            color: #4CAF50;
+            margin-top: 15px;
+            font-size: 1.2em;
+            text-shadow: 1px 1px 2px #000; /* Text shadow for 3D effect */
+        }
+
+        .balloon-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .balloon {
+            position: absolute;
+            width: 60px; /* Increased balloon size */
+            height: 70px; /* Increased balloon size */
+            background-color: red;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: floatBalloon 5s linear infinite, swayBalloon 3s ease-in-out infinite alternate;
+            opacity: 0.8;
+        }
+
+        .balloon::after {
+            content: '';
+            position: absolute;
+            top: 70px; /* Adjusted string position */
+            left: 50%;
+            width: 0;
+            height: 0;
+            margin-left: -6px; /* Adjusted string position */
+            border-left: 6px solid transparent; /* Adjusted string size */
+            border-right: 6px solid transparent; /* Adjusted string size */
+            border-top: 12px solid rgba(255, 255, 255, 0.7); /* Adjusted string size */
+        }
+
+        @keyframes floatBalloon {
+            0% { transform: translateY(100%); opacity: 0; }
+            10%,90% {opacity: 0.8;}
+            100% { transform: translateY(-100%); opacity: 0; }
+        }
+
+        @keyframes swayBalloon {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(25px); } /* Increased sway */
+        }
+
+
+        .ai-robot-icons {
+            display: flex;
+            justify-content: center;
+            gap: 30px; /* Increased gap */
+        }
+
+        .ai-icon, .robot-icon {
+            background-color: #444;
+            color: white;
+            padding: 20px; /* Increased padding */
+            border-radius: 50%;
+            width: 70px; /* Increased icon size */
+            height: 70px; /* Increased icon size */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1.8em; /* Increased font size */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border: 1px solid #FFD700; /* Gold border for AI icons */
+        }
+
+        .ai-icon:hover, .robot-icon:hover {
+            transform: scale(1.15);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8); /* Stronger shadow on hover */
+        }
+
+        .footer {
+            text-align: center;
+            padding: 25px;
+            background-color: #1a1a1a;
+            color: #ddd;
+            font-size: 1em;
+            border-top: 3px solid #FFD700; /* Gold border for footer */
+            box-shadow: 0 -5px 10px rgba(0,0,0,0.5); /* Shadow for footer */
+        }
+
+        .footer a {
+            color: #ddd;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+            color: #fff;
+        }
+        .time-display {
+            font-size: 1.3em; /* Increased font size */
+            color: #ddd;
+            text-align: center;
+            margin-bottom: 25px;
+            text-shadow: 1px 1px 2px #000; /* Text shadow for 3D effect */
+        }
+        .state-selector {
+            padding: 12px;
+            border-radius: 7px;
+            background-color: #444;
+            color: white;
+            border: 1px solid #555;
+            cursor: pointer;
+            font-size: 1em;
+            margin-bottom: 25px;
+        }
+        .state-emergency-numbers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Increased min width */
+            gap: 25px; /* Increased gap */
+            text-align: center;
+            margin-top: 25px;
+        }
+        .rating-section {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #222;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .rating-section h2 {
+            color: #eee;
+            border-bottom: 2px solid #444;
+            padding-bottom: 10px;
+        }
+
+        .rating-stars {
+            display: inline-block;
+            font-size: 2em;
+            cursor: pointer;
+        }
+
+        .star {
+            color: gold;
+            display: inline-block;
+        }
+        .ai-features-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #222;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .ai-features-section h2 {
+            color: #eee;
+            border-bottom: 2px solid #444;
+            padding-bottom: 10px;
+        }
+
+        .ai-feature-list {
+            list-style: disc;
+            padding-left: 20px;
+            color: #ddd;
+        }
+        .ai-feature-list li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="moving-background">
+        <div class="mission-text-container">Mission: Safe India</div>
+    </div>
+    <div class="header">
+        <h1>
+            <span class="header-logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Emblem_of_Uttar_Pradesh.svg/1200px-Emblem_of_Uttar_Pradesh.svg.png" alt="Uttar Pradesh Emblem">
+            </span>
+            Shaurya Tri Lok Chand Mittal
+            <span class="india-flag-logo">
+                <span></span>
+            </span>
+        </h1>
+         <div class="google-verified">
+            <a href="https://images.bannerbear.com/direct/4mGpW3zwrxA1K0AxQw/requests/000/081/949/651/jMVrobL3AQ5konPJzG9ReqJW5/cdb82ccefac941c0d5fb2f6ab641e5a9610e3db6.pdf" target="_blank">
+                <img src="https://images.bannerbear.com/direct/4mGpW3zwrxA1K0AxQw/requests/000/081/949/651/jMVrobL3AQ5konPJzG9ReqJW5/cdb82ccefac941c0d5fb2f6ab641e5a9610e3db6.pdf" alt="Google Verified" title="Google Verified">
+            </a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="time-section">
+            <h2 id="time-heading">Current Time</h2>
+            <div class="time-display" id="live-time"></div>
+        </div>
+
+        <div class="emergency-numbers">
+            <div class="emergency-number" onclick="window.location.href='tel:100'">
+                <h3>Police</h3>
+                <p>100</p>
+            </div>
+            <div class="emergency-number" onclick="window.location.href='tel:101'">
+                <h3>Fire Services</h3>
+                <p>101</p>
+            </div>
+            <div class="emergency-number" onclick="window.location.href='tel:102'">
+                <h3>Ambulance</h3>
+                <p>102</p>
+            </div>
+            <div class="emergency-number" onclick="window.location.href='tel:1091'">
+                <h3>Women Helpline</h3>
+                <p>1091</p>
+            </div>
+            <div class="emergency-number" onclick="window.location.href='tel:1090'">
+                <h3>Senior Citizen Helpline</h3>
+                <p>1090</p>
+            </div>
+            <div class="emergency-number" onclick="window.location.href='tel:1098'">
+                <h3>Child Helpline</h3>
+                <p>1098</p>
+            </div>
+            <div class="emergency-number" onclick="window.location.href='tel:108'">
+                <h3>Disaster Management</h3>
+                <p>108</p>
+            </div>
+            <div class="emergency-number" onclick="window.location.href='tel:1073'">
+                <h3>Road Accident Emergency</h3>
+                <p>1073</p>
+            </div>
+            <div class="emergency-number" onclick="window.location.href='tel:1072'">
+                <h3>Railway Accident Emergency</h3>
+                <p>1072</p>
+            </div>
+            <div class="emergency-number" onclick="window.location.href='tel:1906'">
+                <h3>LPG Leak Helpline</h3>
+                <p>1906</p>
+            </div>
+            <div class="emergency-number" onclick="window.location.href='tel:1363'">
+                <h3>Tourist Helpline</h3>
+                <p>1363</p>
+            </div>
+            <div class="emergency-number" onclick="window.location.href='tel:1097'">
+                <h3>AIDS Helpline</h3>
+                <p>1097</p>
+            </div>
+            <div class="emergency-number" onclick="window.location.href='tel:1964'">
+                <h3>Central Vigilance Commission</h3>
+                <p>1964</p>
+            </div>
+             <div class="emergency-number" onclick="window.location.href='tel:181'">
+                <h3>Women Helpline (Domestic Abuse)</h3>
+                <p>181</p>
+            </div>
+             <div class="emergency-number" onclick="window.location.href='tel:14567'">
+                <h3>Senior Citizen Helpline</h3>
+                <p>14567</p>
+            </div>
+             <div class="emergency-number" onclick="window.location.href='tel:1066'">
+                <h3>Anti-Poison (New Delhi)</h3>
+                <p>1066</p>
+            </div>
+             <div class="emergency-number" onclick="window.location.href='tel:1800116117'">
+                <h3>National Poisons Information Centre (AIIMS, New Delhi)</h3>
+                <p>1800-116-117</p>
+            </div>
+             <div class="emergency-number" onclick="window.location.href='tel:18004251213'">
+                <h3>Poison Information Centre (CMC, Vellore)</h3>
+                <p>1800-425-1213</p>
+            </div>
+             <div class="emergency-number" onclick="window.location.href='tel:9540161344'">
+                <h3>Air Ambulance</h3>
+                <p>9540161344</p>
+            </div>
+             <div class="emergency-number" onclick="window.location.href='tel:139'">
+                <h3>Railway Enquiry</h3>
+                <p>139</p>
+            </div>
+             <div class="emergency-number" onclick="window.location.href='tel:1033'">
+                <h3>Road Accident Emergency Service on National Highways</h3>
+                <p>1033</p>
+            </div>
+             <div class="emergency-number" onclick="window.location.href='tel:1070'">
+                <h3>Relief Commissioner for Natural Calamities</h3>
+                <p>1070</p>
+            </div>
+             <div class="emergency-number" onclick="window.location.href='tel:1930'">
+                <h3>Cyber Crime Helpline</h3>
+                <p>1930</p>
+            </div>
+             <div class="emergency-number" onclick="window.location.href='tel:01123978046'">
+                <h3>COVID-19 Helpline</h3>
+                <p>011-23978046</p>
+            </div>
+             <div class="emergency-number" onclick="window.location.href='tel:18001801551'">
+                <h3>Kisan Call Centre</h3>
+                <p>1800-180-1551</p>
+            </div>
+             <div class="emergency-number" onclick="window.location.href='tel:1912'">
+                <h3>Electricity Complaint</h3>
+                <p>1912</p>
+            </div>
+             <div class="emergency-number" onclick="window.location.href='tel:155313'">
+                <h3>Water Supply</h3>
+                <p>155313</p>
+            </div>
+             <div class="emergency-number" onclick="window.location.href='tel:1090'">
+                <h3>Crime Stopper</h3>
+                <p>1090</p>
+            </div>
+             <div class="emergency-number" onclick="window.location.href='tel:1073'">
+                <h3>Traffic Help</h3>
+                <p>1073</p>
+            </div>
+             <div class="emergency-number" onclick="window.location.href='tel:18005990019'">
+                <h3>KIRAN Mental Health Helpline</h3>
+                <p>1800-599-0019</p>
+            </div>
+        </div>
+
+        <div class="news-section">
+            <h2>Live News Updates <button class="news-refresh-button">Refresh News</button></h2>
+            <div class="news-item">
+                <h4>Breaking News: Accident Reported in City Center</h4>
+                <p>Details are still emerging, but initial reports indicate a major traffic accident in the city center. Emergency services are on the scene. <a href="#">Read More</a></p>
+                <img src="https://via.placeholder.com/150x100" alt="News Image" style="width: 150px; height: 100px; float: left; margin-right: 10px;">
+            </div>
+            <div class="news-item">
+                <h4>Weather Alert: Heavy Rainfall Expected Tomorrow</h4>
+                <p>The meteorological department has issued a warning for heavy rainfall across the state tomorrow. Residents are advised to stay indoors and take necessary precautions. <a href="#">Read More</a></p>
+                 <img src="https://via.placeholder.com/150x100" alt="News Image" style="width: 150px; height: 100px; float: left; margin-right: 10px;">
+            </div>
+             <div class="state-emergency-section">
+                <h3>State Emergency Numbers</h3>
+                <select class="state-selector" id="state-selector">
+                    <option value="">Select State</option>
+                    <option value="up">Uttar Pradesh</option>
+                    <option value="delhi">Delhi</option>
+                    <option value="karnataka">Karnataka</option>
+                    <option value="muzaffarnagar">Muzaffarnagar</option>
+                    </select>
+                <div class="state-emergency-numbers" id="state-numbers-display">
+                    </div>
+            </div>
+        </div>
+
+        <div class="gold-rate-section">
+            <h2>Gold Rate (24 Carat)</h2>
+            <p>? <span id="gold-rate">65,200</span> per 10 grams (Updated: 23 Feb 2025, 9:00 PM IST - Sample Rate)</p>
+        </div>
+
+        <div class="schemes-section">
+            <h2>Government Schemes & Yojanas</h2>
+            <div class="schemes-list">
+                <div class="news-item">
+                    <h4>Mukhyamantri Kanya Sumangala Yojana (Uttar Pradesh)</h4>
+                    <p>Financial aid of ?15,000 for girls' education and well-being, benefiting over 10 lakh families.</p>
+                    <a href="#">More Details</a>
+                </div>
+                <div class="news-item">
+                    <h4>Pradhan Mantri Garib Kalyan Anna Yojana (National)</h4>
+                    <p>Provides free food grains to over 800 million beneficiaries, extended until December 2028.</p>
+                     <a href="#">More Details</a>
+                </div>
+                 <div class="news-item">
+                    <h4>Pradhan Mantri Kisan Samman Nidhi (PM-KISAN) (National)</h4>
+                    <p>Annual financial support of ?6,000 to over 12 crore eligible farmers across the country.</p>
+                     <a href="#">More Details</a>
+                </div>
+                 <div class="news-item">
+                    <h4>DDA Sasta Ghar Housing Scheme 2025 (Delhi)</h4>
+                    <p>Affordable housing options for lower middle-class residents in Delhi/NCR, with over 5,000 homes available.</p>
+                     <a href="#">More Details</a>
+                </div>
+                 <div class="news-item">
+                    <h4>Karnataka State Schemes 2024-25</h4>
+                    <p>Various schemes for poverty alleviation and infrastructure development, with a budget of ?20,000 crore.</p>
+                     <a href="#">More Details</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="todo-section">
+            <h2>My To-Do List</h2>
+            <div class="todo-list">
+                <ul>
+                    <li><span>Call electrician to fix power issue</span> <button>Delete</button></li>
+                    <li><span>Prepare documents for government scheme application</span> <button>Delete</button></li>
+                </ul>
+                <input type="text" id="new-todo" placeholder="Add new item">
+                <button id="add-todo-button">Add</button>
+            </div>
+        </div>
+
+        <div class="login-section">
+            <h2>Login & Verification</h2>
+            <div class="login-box">
+                <input type="password" id="password" placeholder="Enter Password">
+                <button onclick="checkPassword()">Login</button>
+                <p id="login-message" class="login-message" style="display:none;">Congratulations! You have been successfully verified by Shaurya. <br> <span style="font-size: 0.9em; color: #ddd;">Please give us your rating below!</span></p>
+            </div>
+        </div>
+
+         <div class="rating-section" id="rating-section" style="display:none;">
+            <h2>Rate Us</h2>
+            <div class="rating-stars">
+                <span class="star" data-rating="1">&#9733;</span>
+                <span class="star" data-rating="2">&#9733;</span>
+                <span class="star" data-rating="3">&#9733;</span>
+                <span class="star" data-rating="4">&#9733;</span>
+                <span class="star" data-rating="5">&#9733;</span>
+                <span class="star" data-rating="6">&#9733;</span>
+                <span class="star" data-rating="7">&#9733;</span>
+                <span class="star" data-rating="8">&#9733;</span>
+                <span class="star" data-rating="9">&#9733;</span>
+                <span class="star" data-rating="10">&#9733;</span>
+            </div>
+            <p id="rating-message-display" style="margin-top: 10px;"></p>
+        </div>
+
+
+        <div class="language-section">
+            <h2>Select Language</h2>
+            <select class="language-select" id="language-select">
+                <option value="en">English</option>
+                <option value="hi">Hindi</option>
+                <option value="bn">Bengali</option>
+                <option value="te">Telugu</option>
+                <option value="mr">Marathi</option>
+                <option value="ta">Tamil</option>
+                <option value="ur">Urdu</option>
+                <option value="gu">Gujarati</option>
+                <option value="ml">Malayalam</option>
+                <option value="or">Odia</option>
+                <option value="pa">Punjabi</option>
+            </select>
+        </div>
+
+        <div class="contact-section">
+            <h2>Contact Us</h2>
+            <div class="contact-info">
+                <p>Email: mittalshaurya66@gmail.com</p>
+                <p>Emergency Helpline: 112</p>
+            </div>
+            <div class="contact-options">
+                <div class="contact-option" onclick="window.location.href='mailto:mittalshaurya66@gmail.com'">
+                    <i class="fas fa-envelope"></i>
+                    <p>Email</p>
+                </div>
+                <div class="contact-option" onclick="window.location.href='tel:112'">
+                    <i class="fas fa-phone"></i>
+                    <p>Call 112</p>
+                </div>
+                 <div class="contact-option" onclick="window.open('https://www.instagram.com/drunk___captain/?next=%2Fdrunk___captain%2F&hl=en', '_blank')">
+                    <i class="fab fa-instagram"></i>
+                    <p>Instagram</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="director-section">
+            <h2>More Helpline Numbers</h2>
+            <div class="emergency-numbers state-emergency-numbers">
+                <div class="emergency-number" onclick="window.location.href='tel:1912'">
+                    <h3>Electricity Complaint</h3>
+                    <p>1912</p>
+                </div>
+                <div class="emergency-number" onclick="window.location.href='tel:101'">
+                    <h3>Fire Services</h3>
+                    <p>101</p>
+                </div>
+                <div class="emergency-number" onclick="window.location.href='tel:155313'">
+                    <h3>Water Supply</h3>
+                    <p>155313</p>
+                </div>
+                <div class="emergency-number" onclick="window.location.href='tel:1090'">
+                    <h3>Crime Stopper</h3>
+                    <p>1090</p>
+                </div>
+                <div class="emergency-number" onclick="window.location.href='tel:1073'">
+                    <h3>Traffic Help</h3>
+                    <p>1073</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="ai-robot-section">
+            <h2>AI & Robot Assistance</h2>
+            <div class="ai-robot-icons">
+                <div class="ai-icon" onclick="window.open('https://chat.openai.com/', '_blank')">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT" style="height: 50px;">
+                </div>
+                <div class="ai-icon" onclick="window.open('https://bard.google.com/', '_blank')">
+                     <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Google_Bard_logo.svg" alt="Google Bard" style="height: 50px;">
+                </div>
+                <div class="robot-icon">Robot <br> (Coming Soon)</div>
+            </div>
+        </div>
+
+        <div class="map-section">
+            <h2>Nearby Police Stations & Hospitals</h2>
+            <p> <a href="https://www.google.com/maps/search/police+station+near+me" target="_blank">Show Police Stations Near Me on Map</a></p>
+             <p> <a href="https://www.google.com/maps/search/hospitals+near+me" target="_blank">Show Hospitals Near Me on Map</a></p>
+            </div>
+
+         <div class="ai-features-section">
+            <h2>Futuristic AI Features</h2>
+            <ul class="ai-feature-list">
+                <li><strong>AI Chatbot & Voice Assistant:</strong> 24/7 intelligent chatbot and voice assistant for instant emergency guidance.</li>
+                <li><strong>Predictive Emergency Alerts:</strong> AI predicts emergencies based on weather, location, and social media trends.</li>
+                <li><strong>Real-Time Situation Analysis:</strong> AI detects disasters, accidents, and crimes from live CCTV feeds and public reports.</li>
+                <li><strong>One-Click Call for Help:</strong> Connect to police, ambulance, fire, and disaster response with a single tap.</li>
+                <li><strong>Live Location Sharing:</strong> Automatically sends GPS location to emergency responders.</li>
+                <li><strong>Auto-SOS Trigger:</strong> Detects accidents/falls using phone sensors and sends an SOS alert.</li>
+                <li><strong>Geo-Fencing Alerts:</strong> Warns users when entering dangerous zones or disaster areas.</li>
+                <li><strong>Voice Commands:</strong> Emergency requests can be made hands-free.</li>
+                <li><strong>Multi-Language Support:</strong> AI auto-translates emergency messages in different languages.</li>
+                <li><strong>Accessibility Mode:</strong> Features for visually/hearing-impaired users.</li>
+                <li><strong>AR Rescue Guidance:</strong> AR overlays show escape routes in fires or floods (Coming Soon).</li>
+                <li><strong>3D Live Emergency Map:</strong> Displays real-time disaster zones, medical facilities, and police stations (Coming Soon).</li>
+                <li><strong>Encrypted Emergency Data:</strong> Protects user identity and case details.</li>
+                <li><strong>Fraud Detection AI:</strong> Prevents fake emergency calls and scams.</li>
+                <li><strong>Smartwatch SOS Integration:</strong> Integrates with smartwatches for SOS alerts (Coming Soon).</li>
+                <li><strong>Vehicle Crash Detection:</strong> Automatically alerts nearby hospitals in case of accidents (Coming Soon).</li>
+                <li><strong>IoT Smart Home Safety:</strong> AI detects gas leaks, fire, or break-ins in smart homes (Coming Soon).</li>
+                <li><strong>Real-Time Disaster Warnings:</strong> Live alerts for earthquakes, storms, pandemics, and terror threats.</li>
+                <li><strong>AI-Curated News:</strong> Auto-updates emergency-related news and missing person alerts.</li>
+            </ul>
+        </div>
+
+
+        <div class="about-us-section">
+            <h2>About Us</h2>
+            <div class="about-us-content">
+                <p>Shaurya Sahayak is a national help platform dedicated to providing essential emergency services information and resources across India. Our mission is to make India safer by offering a comprehensive and easily accessible platform for citizens in need. We leverage futuristic technologies like AI and 3D visualization to enhance emergency response and preparedness.</p>
+                <h3>Our Mission</h3>
+                <p><strong>Our Mission is to Make India Safer</strong></p>
+                <p>Special Thanks to Mr. Shaurya Mittal</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 Shaurya Sahayak. All Rights Reserved.</p>
+        <p><a href="#">Disclaimer</a> | <a href="#">Terms and Condition</a> | <a href="#">Copyright Policy</a> | <a href="#">Privacy Policy</a> | <a href="#">Hyperlinking Policy</a></p>
+        <p>This is the official Website of Department of Shaurya Sahayak India Emergency, Uttar Pradesh, India. Content on this website is published and 'managed' by Shaurya.</p>
+        <p>For any query regarding this website, Please contact the "Web Administrator".</p>
+    </div>
+
+    <div id="balloon-container" class="balloon-animation"></div>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const dayOfWeek = daysOfWeek[now.getDay()];
+            const day = String(now.getDate()).padStart(2, '0');
+            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            const month = monthNames[now.getMonth()];
+            const year = now.getFullYear();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+
+            const formattedTime = `${dayOfWeek}, ${month} ${day}, ${year} ${hours}:${minutes}:${seconds}`;
+            document.getElementById('live-time').textContent = formattedTime;
+        }
+        setInterval(updateTime, 1000);
+        updateTime(); // Initial call
+
+        function checkPassword() {
+            var password = document.getElementById("password").value;
+            var loginMessage = document.getElementById("login-message");
+            var ratingSection = document.getElementById("rating-section");
+            if (password === "mittal") {
+                loginMessage.style.display = "block";
+                ratingSection.style.display = "block";
+                startBalloonAnimation();
+            } else {
+                loginMessage.style.display = "none";
+                ratingSection.style.display = "none";
+                stopBalloonAnimation();
+            }
+        }
+
+        function startBalloonAnimation() {
+            const container = document.getElementById('balloon-container');
+            container.innerHTML = ''; // Clear any existing balloons
+            for (let i = 0; i < 20; i++) {
+                createBalloon(container);
+            }
+        }
+
+        function stopBalloonAnimation() {
+            const container = document.getElementById('balloon-container');
+            container.innerHTML = ''; // Clear balloons
+        }
+
+
+        function createBalloon(container) {
+            const balloon = document.createElement('div');
+            balloon.classList.add('balloon');
+            balloon.style.left = `${Math.random() * 100}vw`;
+            balloon.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            balloon.style.animationDuration = `${Math.random() * 3 + 5}s`;
+            balloon.style.animationDelay = `${Math.random() * 2}s`;
+            container.appendChild(balloon);
+            balloon.addEventListener('animationiteration', () => {
+                balloon.remove();
+                createBalloon(container); // Recreate balloon when animation finishes
+            });
+        }
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const stateSelector = document.getElementById('state-selector');
+            const stateNumbersDisplay = document.getElementById('state-numbers-display');
+
+            stateSelector.addEventListener('change', function() {
+                const selectedState = stateSelector.value;
+                let numbersHTML = '';
+
+                if (selectedState === 'up') {
+                    numbersHTML = `
+                        <div class="emergency-number" onclick="window.location.href='tel:1912'"><h3>Electricity UP</h3><p>1912</p></div>
+                        <div class="emergency-number" onclick="window.location.href='tel:101'"><h3>Fire Services UP</h3><p>101</p></div>
+                        <div class="emergency-number" onclick="window.location.href='tel:102'"><h3>Ambulance UP</h3><p>102</p></div>
+                        <div class="emergency-number" onclick="window.location.href='tel:1800102108'"><h3>CM Helpline UP</h3><p>1800-102-108</p></div>
+                        `;
+                } else if (selectedState === 'delhi') {
+                    numbersHTML = `
+                        <div class="emergency-number" onclick="window.location.href='tel:1912'"><h3>Electricity Delhi</h3><p>1912</p></div>
+                        <div class="emergency-number" onclick="window.location.href='tel:101'"><h3>Fire Services Delhi</h3><p>101</p></div>
+                        <div class="emergency-number" onclick="window.location.href='tel:102'"><h3>Ambulance Delhi</h3><p>102</p></div>
+                        <div class="emergency-number" onclick="window.location.href='tel:1031'"><h3>Delhi Government Helpline</h3><p>1031</p></div>
+                        `;
+                } else if (selectedState === 'karnataka') {
+                    numbersHTML = `
+                        <div class="emergency-number" onclick="window.location.href='tel:1912'"><h3>Electricity Karnataka</h3><p>1912</p></div>
+                        <div class="emergency-number" onclick="window.location.href='tel:101'"><h3>Fire Services Karnataka</h3><p>101</p></div>
+                        <div class="emergency-number" onclick="window.location.href='tel:102'"><h3>Ambulance Karnataka</h3><p>102</p></div>
+                        <div class="emergency-number" onclick="window.location.href='tel:1902'"><h3>Karnataka Government Helpline</h3><p>1902</p></div>
+                        `;
+                } else if (selectedState === 'muzaffarnagar') {
+                    numbersHTML = `
+                        <div class="emergency-number" onclick="window.location.href='tel:1912'"><h3>Electricity Muzaffarnagar</h3><p>1912</p></div>
+                        <div class="emergency-number" onclick="window.location.href='tel:101'"><h3>Fire Services Muzaffarnagar</h3><p>101</p></div>
+                        <div class="emergency-number" onclick="window.location.href='tel:102'"><h3>Ambulance Muzaffarnagar</h3><p>102</p></div>
+                        `;
+                }
+
+                stateNumbersDisplay.innerHTML = numbersHTML;
+            });
+        });
+
+        document.querySelectorAll('.rating-stars .star').forEach(star => {
+            star.addEventListener('click', function() {
+                const rating = this.getAttribute('data-rating');
+                document.getElementById('rating-message-display').textContent = `Thank you for rating us ${rating} stars!`;
+            });
+        });
+
+
+    </script>
+
+</body>
+</html>
